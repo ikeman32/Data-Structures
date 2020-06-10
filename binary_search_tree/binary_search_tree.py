@@ -1,3 +1,4 @@
+from RecursionLimit import RecursionLimit
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -17,22 +18,38 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        if value < self.value:
-            if self.left is None:
+        if value < self.value:#If value is less than root
+            if self.left is None:#If left value none insert into node
                 self.left = BSTNode(value)
-            else:
+            else:#If left value not none recursively check before inserting
                 self.left.insert(value)
-        else:
-            if self.right is None:
+        else:#If the value is not less than root
+            if self.right is None:#If right value is none insert into node
                 self.right = BSTNode(value)
-            else:
+            else:#If right value not none recursively check before inserting
                 self.right.insert(value)
 
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        if target == self.value:#Return True if target is value
+            return True
+
+        if target < self.value or target > self.value:
+            if target is self.left.value or target is self.right.value:
+                return True
+            else:
+                LIMIT = 10000
+                with RecursionLimit(LIMIT):#initial recursion limit
+                    try:
+                        self.contains(target)
+                    except:
+                        LIMIT *= 2#double limit if not enough
+        else:
+            return False
+                
+
 
     # Return the maximum value found in the tree
     def get_max(self):
