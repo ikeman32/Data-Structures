@@ -1,4 +1,4 @@
-from RecursionLimit import RecursionLimit
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -40,12 +40,12 @@ class BSTNode:
             if target is self.left.value or target is self.right.value:
                 return True
             else:
-                LIMIT = 10000
-                with RecursionLimit(LIMIT):#initial recursion limit
-                    try:
-                        self.contains(target)
-                    except:
-                        LIMIT *= 2#double limit if not enough
+                try:
+                    self.right.contains(target)
+                    self.left.contains(target)
+                except:
+                    return None
+                
         else:
             return False
                 
@@ -53,11 +53,22 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        if self.right is None:
+            return self.value
+        else:
+            return self.right.get_max()
+            
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)#Add self.value to the callback
+        if self.right != None: 
+            self.right.for_each(fn)#Recursively add all values from the right
+        if self.left != None:
+            self.left.for_each(fn)#Recursively add all values from the left
+        
+        
+        
 
     # Part 2 -----------------------
 
