@@ -1,8 +1,8 @@
 import sys
 #sys.path.append('./stack.py')
 
-sys.path.append('./helpers/')
-from helpers.queue import Queue
+sys.path.append('/home/duke/lambda/Python/Data-Structures/binary_search_tree/helpers/queue.py')
+from collections import deque
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -95,12 +95,18 @@ class BSTNode:
     # in an iterative breadth first traversal
     def bft_print(self, node):
         #queue
-        self.q = Queue()
+        q = deque()
 
-        self.q.enqueue(node)
+        q.append(node)
 
-        while self.q.size > 0:
-            pass
+        while len(q) > 0:
+            n = q.popleft()
+            print(n.value)
+
+            if n.left:
+                q.append(n.left)
+            if n.right:
+                q.append(n.right)
         
 
     # Print the value of every node, starting with the given node,

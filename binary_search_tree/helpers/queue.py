@@ -1,9 +1,11 @@
-from helpers import dll
+import sys
+sys.path.append('/home/duke/lambda/Python/Data-Structures/singly_linked_list/singly_linked_list.py')
+from dll import DoublyLinkedList
 
 class Queue:
     def __init__(self):
         self.size = 0
-        self.storage = dll.DoublyLinkedList()
+        self.storage = DoublyLinkedList()
     
     def __len__(self):
         return self.size
