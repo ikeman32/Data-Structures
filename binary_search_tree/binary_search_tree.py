@@ -113,8 +113,16 @@ class BSTNode:
     # in an iterative depth first traversal
     def dft_print(self, node):
         #stack
-        pass
+        stack = [node]
 
+        while len(stack) > 0:
+            s = stack.pop()
+            print(s.value)
+
+            if s.left:
+                stack.append(s.left)
+            if s.right:
+                stack.append(s.right)
     # Stretch Goals -------------------------
     # Note: Research may be required
 
